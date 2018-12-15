@@ -12,4 +12,4 @@ class HomeContainer extends Component {
    }
  }
 
-export default connect(HomeContainer)
+export default connect()(HomeContainer)
