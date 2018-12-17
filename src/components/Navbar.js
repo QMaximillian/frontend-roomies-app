@@ -6,25 +6,29 @@ import '../App.css'
 const Navbar = (props) => {
   console.log(props)
   return (
-
-      <ul className='navbar'>
-        <li >
-          <Link to='/login'>
-            Login
-          </Link>
-        </li>
-        <li>
+    <div className="nav-container">
+        <div className="nav-button">
           <Link to='/homepage'>
             Roomies
           </Link>
-        </li>
-        <li>
+        </div>
+        <div className="nav-button nav-button-signup">
+          <Link to='/sign-up'>
+            Sign Up
+          </Link>
+        </div>
+        <div className="nav-button nav-button-login">
+          <Link to='/login'>
+            Login
+          </Link>
+        </div>
+        <div className="nav-button nav-button-about">
           <Link to='/about'>
             About
           </Link>
-        </li>
-      </ul>
+        </div>
 
+    </div>
   )
 }
 
