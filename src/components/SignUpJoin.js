@@ -20,8 +20,6 @@ class SignUpJoin extends Component {
   }
 
  render() {
-
-
      return (
         <div>
         <button

@@ -8,6 +8,7 @@ import SignUp from './components/SignUp'
 import Login from './components/Login'
 import { withRouter } from "react-router";
 import SignUpJoin from './components/SignUpJoin'
+import HouseCreateForm from './components/HouseCreateForm'
 
 class App extends Component {
 
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path="/sign-up" render={(props) => <SignUp {...props}/>}/>
           <Route exact path="/login" render={(props) => <Login {...props}/>}/>
           <Route exact path="/signedup" render={(props) => <SignUpJoin {...props}/>}/>
+          <Route exact path="/create" render={(props) => <HouseCreateForm {...props}/>}/>
         </Switch>
       </div>
 
