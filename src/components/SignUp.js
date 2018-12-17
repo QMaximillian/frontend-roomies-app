@@ -6,31 +6,22 @@ import { withRouter } from "react-router";
 class SignUp extends Component {
 
     state = {
-      signedUp: false
+      submitted: false
     }
 
     componentDidUpdate() {
-      if (this.state.signedUp) {
-        this.props.history.push('/homepage')
+      if (this.state.submitted) {
+        this.props.history.push('/signedup')
       }
     }
 
    render() {
-     console.log(this.props);
-
-     return (
-
-        <div>
-        <button
-         onClick={() => this.setState({
-           signedUp: true
-         }, () => console.log(this.state.signedUp))
-         }>
-        </button>
-
-        </div>
-     )
-   }
+       return (
+          <button
+            onClick={() => {this.setState({submitted: true})}}>Submit Me
+          </button>
+       )
+     }
  }
 
  export default withRouter(connect()(SignUp))
