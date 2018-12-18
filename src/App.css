@@ -15,20 +15,23 @@
 
 }
 
-.nav-button {
-  transition-duration: 0.4s;
-  grid-column: span 1;
-}
 
 .nav-button:hover {
+  display: grid;
   background-color: var(--main-color);
   color: var(--secondary-color);
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  transition-duration: 0.4s;
+
 }
 
 .nav-button > a {
   text-decoration: none;
   color: var(--secondary-color);
-  z-index: 1;
+
 }
 
 .nav-button-about {
@@ -57,11 +60,53 @@
   grid-row: 2;
 }
 
-.house-create-form-grid {
+.house-form {
   display: grid;
   grid-template-columns: repeat(3, 1fr) 500px repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr) 500px repeat(3, 1fr);
+  grid-template-rows: auto;
   grid-gap: 20px;
   justify-items: center;
   align-items: center;
+  padding: 100px;
+}
+
+.house-item {
+  width: 200px;
+  height: 25px;
+
+}
+
+.house-item-label {
+  grid-column: 4 / span 1;
+}
+
+#house-item-label1 {
+  grid-column: 4 / span 1;
+  grid-row: 1;
+}
+
+#house-item-label2 {
+  grid-column: 4 / span 1;
+  grid-row: 3;
+}
+.house-item1 {
+  grid-row: 2;
+}
+.house-item2 {
+
+}
+
+.house-item3 {
+
+}
+
+.house-item4 {
+  grid-row: 4;
+}
+.house-item5{
+  grid-row: 5;
+}
+
+.house-submit {
+  grid-row: 6;
 }
