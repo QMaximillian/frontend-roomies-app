@@ -9,8 +9,8 @@ class HouseCreateForm extends Component {
   state = {
 
     home: {
-      house_number: "",
-      house_address: "",
+      home_number: "",
+      home_address: "",
       city: "",
       state: "",
       zip_code: 0
@@ -48,7 +48,7 @@ class HouseCreateForm extends Component {
     }, () => console.log(this.state))
   }
 
-  
+
   alertPossibleRoomate = () => {
 
   }
@@ -67,14 +67,14 @@ class HouseCreateForm extends Component {
             <div className="house-item 1">
               <label>House Number</label>
               <input
-                name="house_number"
+                name="home_number"
                 />
             </div>
 
             <div className="house-item 2">
               <label>St., Ave., etc.</label>
               <input
-                name="house_address"/>
+                name="home_address"/>
             </div>
 
             <div className="house-item 3">
