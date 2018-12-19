@@ -1,4 +1,5 @@
 const baseHomeUrl = "http://localhost:3001/homes"
+const baseUserUrl = "http://localhost:3001/users"
 
 export const fetchUser = () =>  {
   return fetch('https://localhost:3001/users').then(resp => resp.json())
@@ -12,8 +13,19 @@ export const fetchCreateHome = (e, body) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(body)
-  })
+  }).then(resp => resp.json())
 }
+
+export const fetchCreateUser = (body) => {
+  return fetch(baseUserUrl, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  }).then(resp => resp.json())
+}
+
 
 const headers = (method, body) => {
   return {

@@ -62,7 +62,7 @@
 
 .house-form {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-template-rows: auto;
   grid-gap: 20px;
   justify-items: center;
@@ -71,26 +71,15 @@
 }
 
 .house-item {
-  width: 200px;
+  width: minmax(200px, 1fr);
   height: 25px;
   grid-column: span 1;
+  grid-row: span 1;
 
 }
 
-.house-item-label {
-  grid-column: 4 / span 1;
-}
 
-#house-item-label1 {
-  grid-column: 4 / span 1;
-  grid-row: 1;
-}
-
-#house-item-label2 {
-  grid-column: 4 / span 1;
-  grid-row: 3;
-}
-.house-item1 {
+.house-item.1 {
   grid-row: 2;
 }
 

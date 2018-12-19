@@ -39,6 +39,20 @@ class HouseCreateForm extends Component {
   }
 
 
+  handleRoomateEmail = (e) => {
+    this.setState({
+      roomate_emails: {
+        ...this.state.roomate_emails,
+        [e.target.name]: e.target.value
+      }
+    }, () => console.log(this.state))
+  }
+
+  
+  alertPossibleRoomate = () => {
+
+  }
+
    render() {
      const homeParams = {home: this.state.home}
      return (
@@ -50,64 +64,76 @@ class HouseCreateForm extends Component {
           <form
             onChange={this.handleHomeChange}
             className="house-form">
+            <div className="house-item 1">
+              <label>House Number</label>
+              <input
+                name="house_number"
+                />
+            </div>
 
-            <label>House Number</label>
-            <input
-              name="house_number"
-              className="house-item"/>
+            <div className="house-item 2">
+              <label>St., Ave., etc.</label>
+              <input
+                name="house_address"/>
+            </div>
 
-            <label>St., Ave., etc.</label>
-            <input
-              name="house_address"
-              className="house-item"/>
+            <div className="house-item 3">
+              <label>City</label>
+              <input
+                name="city"/>
+            </div>
 
-            <label>City</label>
-            <input
-              name="city"
-              className="house-item"/>
+            <div className="house-item 5">
+              <label>State</label>
+              <input
+                name="state"/>
+            </div>
 
-            <label>State</label>
-            <input
-              name="state"
-              className="house-item"/>
-
-            <label>Zip Code</label>
-            <input
-              name="zip_code"
-              className="house-item"/>
-
+            <div className="house-item">
+              <label>Zip Code</label>
+              <input
+                name="zip_code"/>
+            </div>
+            <button
+              className="house-item house-submit"
+              onClick={(e) => fetchCreateHome(e, homeParams).then(console.log)}>Submit
+            </button>
           </form>
 
 
-          {/* <form>
-            <label
-              id="house-item-label1"
-              >Roomate E-Mail
-            </label>
-            <input
-              name="email1"
-              className="house-item .house-item1"/>
-            <label
-              id="house-item-label2">Roomate E-Mail
-            </label>
-            <input
-              name="email2"
-              className="house-item"/>
-            <label>Roomate E-Mail</label>
-            <input
-              name="roomate3email"
-              className=" house-item"/>
-          </form> */}
-
-
-
-
-
-
-
+          <form
+            onChange={this.handleRoomateEmail}>
+            <div>
+              <label>Roomate E-Mail</label>
+              <input
+                name="email1"
+                className="house-item .house-item1"/>
+            </div>
             <button
-              className="house-item house-submit"
-              onClick={(e) => fetchCreateHome(e, homeParams)}>Submit</button>
+              onClick={() => this.alertPossibleRoomate()}></button>
+
+            {/*}<div>
+              <label>Roomate E-Mail</label>
+              <input
+                name="email2"
+                className="house-item"/>
+            </div>
+
+            <div>
+              <label>Roomate E-Mail</label>
+              <input
+                name="roomate3email"
+                className=" house-item"/>
+            </div>*/}
+          </form>
+
+
+
+
+
+
+
+
 
       </Fragment>
      )
