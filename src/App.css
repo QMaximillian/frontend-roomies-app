@@ -62,7 +62,7 @@
 
 .house-form {
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 500px repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   grid-gap: 20px;
   justify-items: center;
@@ -73,6 +73,7 @@
 .house-item {
   width: 200px;
   height: 25px;
+  grid-column: span 1;
 
 }
 
@@ -92,9 +93,7 @@
 .house-item1 {
   grid-row: 2;
 }
-.house-item2 {
 
-}
 
 .house-item3 {
 
