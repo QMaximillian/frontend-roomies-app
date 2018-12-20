@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import '../App.css'
 
 const Navbar = (props) => {
-  console.log(props)
+
   return (
     <div className="nav-container">
         <div className="nav-button">
