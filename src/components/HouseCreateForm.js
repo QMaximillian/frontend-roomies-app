@@ -3,6 +3,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../App.css'
 import { fetchCreateHome } from '../adapters/index.js'
+import withAuth from '../hocs/withAuth'
 
 class HouseCreateForm extends Component {
 
@@ -55,6 +56,8 @@ class HouseCreateForm extends Component {
 
    render() {
      const homeParams = {home: this.state.home}
+
+     console.log(this.props);
      return (
       <Fragment>
         <label
@@ -140,4 +143,4 @@ class HouseCreateForm extends Component {
    }
  }
 
- export default withRouter(connect()(HouseCreateForm))
+ export default withAuth(withRouter(connect()(HouseCreateForm)))

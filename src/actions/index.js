@@ -1,7 +1,19 @@
-import { LOAD_INITIAL_USER_STATE }
+import { LOAD_INITIAL_USER_STATE } from './types.js'
+import { fetchCurrentUser } from '../adapters/index.js'
 
-export const loadInitialUserState = () => {
+export const loadInitialUserState = (id) => {
   return (dispatch) => {
-    fetchUser().then(resp => console.log(resp))
+    fetchCurrentUser(id).then(resp => {
+      dispatch(setUser(resp.user))
+    })
+  }
+}
+
+export const setUser = (user) => {
+  return {
+    type: LOAD_INITIAL_USER_STATE,
+    payload: {
+      currentUser: user
+    }
   }
 }

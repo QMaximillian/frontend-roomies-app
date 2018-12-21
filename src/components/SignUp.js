@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { withRouter } from "react-router";
 import { fetchCreateUser } from '../adapters/index.js'
+import { loadInitialUserState } from '../actions/index.js'
+
 class SignUp extends Component {
 
     state = {
@@ -19,6 +21,13 @@ class SignUp extends Component {
       if (this.state.submitted) {
         this.props.history.push('/signedup')
       }
+      
+      if (this.props.currentUser.id) {
+      this.setState({
+        submitted: true
+      })
+      }
+
     }
 
     handleChange = (e) => {
@@ -36,10 +45,8 @@ class SignUp extends Component {
 
     handleSignUp = (e) => {
       e.preventDefault()
-      fetchCreateUser({user: this.state.user}).then(console.log)
-      this.setState({
-        submitted: true
-      })
+      fetchCreateUser({user: this.state.user}).then(resp =>
+      this.props.loadInitialUserState(resp.id))
     }
 
 
@@ -47,6 +54,7 @@ class SignUp extends Component {
 
 
      render() {
+       console.log(this.props)
        return (
           <form
             onChange={this.handleChange}>
@@ -68,4 +76,4 @@ class SignUp extends Component {
      }
     }
 
- export default withRouter(connect()(SignUp))
+ export default withRouter(connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(SignUp))

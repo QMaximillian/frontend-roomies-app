@@ -9,7 +9,7 @@ import Login from './components/Login'
 import { withRouter } from "react-router";
 import SignUpJoin from './components/SignUpJoin'
 import HouseCreateForm from './components/HouseCreateForm'
-
+import { loadInitialUserState } from './actions/index.js'
 class App extends Component {
 
   state = {
@@ -32,7 +32,7 @@ class App extends Component {
 
   render() {
     const loggedIn = !!this.state.auth.currentUser.id
-    console.log(loggedIn);
+
     return (
       <div>
       <Navbar/>
@@ -41,7 +41,7 @@ class App extends Component {
           <Route exact path="/sign-up" render={(props) => <SignUp {...props}/>}/>
           <Route exact path="/login" render={(props) => <Login handleLoginUser={this.handleLoginUser} loggedIn={loggedIn} {...props}/>}/>
           <Route exact path="/signedup" render={(props) => <SignUpJoin {...props}/>}/>
-          <Route exact path="/create" render={(props) => <HouseCreateForm {...props}/>}/>
+          <Route exact path="/create" render={(props) => <HouseCreateForm loggedIn={loggedIn} {...props}/>}/>
         </Switch>
       </div>
 
@@ -49,4 +49,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect()(App))
+export default withRouter(connect(null, { loadInitialUserState })(App))

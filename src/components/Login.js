@@ -13,7 +13,7 @@ class Login extends Component {
 
   componentDidUpdate(){
     if (this.props.loggedIn) {
-     return this.props.history.push('/roomie-home')
+     // return this.props.history.push('/roomie-home')
    }
   }
   handleSignIn = (e) => {

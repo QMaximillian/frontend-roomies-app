@@ -11,7 +11,11 @@ export const fetchLoginActor = (body) => {
 }
 
 export const fetchUser = () =>  {
-  return fetch('https://localhost:3001/users').then(resp => resp.json())
+  return fetch(baseUserUrl).then(resp => resp.json())
+}
+
+export const fetchCurrentUser = (id) => {
+  return fetch(baseUserUrl + `/${id}`).then(resp => resp.json())
 }
 
 export const fetchCreateHome = (e, body) => {

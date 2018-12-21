@@ -1,12 +1,16 @@
-import React from 'react'
-
+import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 const withAuth = (WrappedComponent) => {
-  return(
-    <div>
-      return <WrappedComponent />
-    </div>
-  )
+  return class extends Component {
+    render() {
+      if (this.props.loggedIn) {
+        return <WrappedComponent {...this.props}/>
+      } else {
+      return <Redirect to='/homepage' />
+    }
+  }
+}
 }
 
 export default withAuth
