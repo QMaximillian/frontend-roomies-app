@@ -13,13 +13,14 @@ class Login extends Component {
 
   componentDidUpdate(){
     if (this.props.loggedIn) {
-     // return this.props.history.push('/roomie-home')
+     return this.props.history.push('/roomie-home')
    }
   }
   handleSignIn = (e) => {
     e.preventDefault()
     fetchLoginActor(this.state).then(resp => {
       this.props.handleLoginUser(resp.user)
+      localStorage.setItem('token', resp.user.id)
     })
   }
 

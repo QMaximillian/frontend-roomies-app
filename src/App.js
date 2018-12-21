@@ -10,17 +10,35 @@ import { withRouter } from "react-router";
 import SignUpJoin from './components/SignUpJoin'
 import HouseCreateForm from './components/HouseCreateForm'
 import { loadInitialUserState } from './actions/index.js'
+import { fetchReauthUser } from './adapters/index.js'
+
+
 class App extends Component {
 
   state = {
+    authenticating: true,
     auth: {
       currentUser : {}
+    }
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      fetchReauthUser().then(resp => this.handleLoginUser(resp))
+    } else {
+      this.setState((prevState) => {
+        return {
+          ...prevState.auth,
+          authenticating: false
+        }
+      }, () => console.log(this.state.authenticating))
     }
   }
 
   handleLoginUser = (user) => {
     const newAuth = {
         ...this.state.auth,
+        authenticating: false,
         currentUser: user
     }
 

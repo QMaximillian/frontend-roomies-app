@@ -1,6 +1,7 @@
 const baseHomeUrl = "http://localhost:3001/homes"
 const baseUserUrl = "http://localhost:3001/users"
 const baseLoginUrl = "http://localhost:3001/login"
+const baseUrl = "http://localhost:3001/reauth"
 
 export const fetchLoginActor = (body) => {
   return fetch(baseLoginUrl, {
@@ -8,6 +9,18 @@ export const fetchLoginActor = (body) => {
     headers: headers(),
     body: JSON.stringify(body)
   }).then(resp => resp.json())
+}
+
+export const fetchReauthUser = () => {
+  return fetch(baseUrl, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: localStorage.getItem('token')
+    }
+  })
+  .then(resp => resp.json())
 }
 
 export const fetchUser = () =>  {
