@@ -49,8 +49,8 @@ class App extends Component {
 
 
   render() {
-    const loggedIn = !!this.state.auth.currentUser.id
-
+    const loggedIn = !!this.props.currentUser.id
+    console.log(this.props)
     return (
       <div>
       <Navbar/>
@@ -67,4 +67,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(null, { loadInitialUserState })(App))
+export default withRouter(connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(App))

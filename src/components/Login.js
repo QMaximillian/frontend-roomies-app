@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchLoginActor } from '../adapters/index.js'
-
+import { withRouter } from 'react-router-dom'
 class Login extends Component {
 
   state = {
@@ -20,7 +20,7 @@ class Login extends Component {
     e.preventDefault()
     fetchLoginActor(this.state).then(resp => {
       this.props.handleLoginUser(resp.user)
-      localStorage.setItem('token', resp.user.id)
+      localStorage.setItem('token', resp.user.jwt)
     })
   }
 
@@ -30,7 +30,7 @@ class Login extends Component {
         ...this.state.user,
         [e.target.name]: e.target.value
       }
-    },() => console.log(this.state) )
+    },() => console.log(this.state))
   }
 
    render() {
@@ -62,4 +62,4 @@ class Login extends Component {
    }
  }
 
- export default connect()(Login)
+ export default withRouter(connect()(Login))
