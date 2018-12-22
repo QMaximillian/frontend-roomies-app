@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchLoginActor } from '../adapters/index.js'
 import { withRouter } from 'react-router-dom'
+import { loadInitialUserState } from '../actions/index.js'
+
 class Login extends Component {
 
   state = {
@@ -16,10 +18,12 @@ class Login extends Component {
      return this.props.history.push('/roomie-home')
    }
   }
+
   handleSignIn = (e) => {
     e.preventDefault()
     fetchLoginActor(this.state).then(resp => {
       this.props.handleLoginUser(resp.user)
+      this.props.loadInitialUserState(resp.user.id)
       localStorage.setItem('token', resp.user.jwt)
     })
   }
@@ -34,9 +38,7 @@ class Login extends Component {
   }
 
    render() {
-     if (this.props.loggedIn) {
-
-     }
+     console.log(this.props)
      return (
         <div>
         <form
@@ -62,4 +64,4 @@ class Login extends Component {
    }
  }
 
- export default withRouter(connect()(Login))
+ export default connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(Login)

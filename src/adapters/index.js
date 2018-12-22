@@ -28,7 +28,10 @@ export const fetchUser = () =>  {
 }
 
 export const fetchCurrentUser = (id) => {
-  return fetch(baseUserUrl + `/${id}`).then(resp => resp.json())
+  return fetch(baseUserUrl + `/${id}`, {
+    method: 'GET',
+    headers: headers()
+  }).then(resp => resp.json())
 }
 
 export const fetchCreateHome = (e, body) => {
@@ -67,6 +70,7 @@ export const fetchCreateUser = (body) => {
 const headers = () => {
   return {
       'Content-Type': 'application/json',
-      Accept: 'application/json'
+      Accept: 'application/json',
+      Authorization: localStorage.getItem('token')
   }
 }

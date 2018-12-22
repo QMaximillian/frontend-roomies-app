@@ -31,7 +31,7 @@ class App extends Component {
           ...prevState.auth,
           authenticating: false
         }
-      }, () => console.log(this.state.authenticating))
+      })
     }
   }
 
@@ -50,7 +50,7 @@ class App extends Component {
 
   render() {
     const loggedIn = !!this.props.currentUser.id
-    console.log(this.props)
+    console.log(this.props.currentUser)
     return (
       <div>
       <Navbar/>
@@ -67,4 +67,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(App))
+export default withRouter(connect(state => ({ currentUser: state.currentUser }))(App))
