@@ -8,7 +8,7 @@ import { loadInitialUserState } from '../actions/index.js'
 class SignUp extends Component {
 
     state = {
-      submitted: false,
+      redirect: false,
       user: {
         name: '',
         email: '',
@@ -18,16 +18,9 @@ class SignUp extends Component {
     }
 
     componentDidUpdate() {
-      if (this.state.submitted) {
+      if (this.state.redirect) {
         this.props.history.push('/signedup')
       }
-      
-      if (this.props.currentUser.id) {
-      this.setState({
-        submitted: true
-      })
-      }
-
     }
 
     handleChange = (e) => {
@@ -47,6 +40,10 @@ class SignUp extends Component {
       e.preventDefault()
       fetchCreateUser({user: this.state.user}).then(resp =>
       this.props.loadInitialUserState(resp.id))
+      .then(this.setState({
+          redirect: true
+      })
+    )
     }
 
 

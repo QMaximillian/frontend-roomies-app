@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../App.css'
@@ -17,6 +17,10 @@ const Navbar = (props) => {
             Sign Up
           </Link>
         </div>
+        {props.loggedIn ?
+          <div></div>
+          :
+        <Fragment>
         <div className="nav-button nav-button-login">
           <Link to='/login'>
             Login
@@ -27,7 +31,7 @@ const Navbar = (props) => {
             About
           </Link>
         </div>
-
+    </Fragment> }
     </div>
   )
 }

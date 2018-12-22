@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchLoginActor } from '../adapters/index.js'
+import { fetchLoginUser } from '../adapters/index.js'
 import { withRouter } from 'react-router-dom'
 import { loadInitialUserState } from '../actions/index.js'
 
 class Login extends Component {
 
   state = {
+    redirect: false,
     user: {
       email: '',
       password: ''
@@ -14,17 +15,18 @@ class Login extends Component {
   }
 
   componentDidUpdate(){
-    if (this.props.loggedIn) {
+    if (this.state.redirect) {
      return this.props.history.push('/roomie-home')
    }
   }
 
-  handleSignIn = (e) => {
+  handleLoginSubmit = (e) => {
     e.preventDefault()
-    fetchLoginActor(this.state).then(resp => {
-      this.props.handleLoginUser(resp.user)
-      this.props.loadInitialUserState(resp.user.id)
+    fetchLoginUser(this.state)
+    .then(resp => {
       localStorage.setItem('token', resp.user.jwt)
+      this.props.loadInitialUserState(resp.user.id)
+      this.setState({ redirect: true})
     })
   }
 
@@ -34,11 +36,11 @@ class Login extends Component {
         ...this.state.user,
         [e.target.name]: e.target.value
       }
-    },() => console.log(this.state))
+    })
   }
 
    render() {
-     console.log(this.props)
+
      return (
         <div>
         <form
@@ -56,7 +58,7 @@ class Login extends Component {
               value={this.state.password}/>
           </div>
           <button
-            onClick={(e) => this.handleSignIn(e)}>Submit Me
+            onClick={(e) => this.handleLoginSubmit(e)}>Submit Me
           </button>
         </form>
         </div>

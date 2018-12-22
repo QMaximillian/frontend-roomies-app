@@ -16,48 +16,51 @@ import { fetchReauthUser } from './adapters/index.js'
 class App extends Component {
 
   state = {
-    authenticating: true,
     auth: {
-      currentUser : {}
+      user : {}
     }
   }
 
   componentDidMount() {
     if (localStorage.getItem('token')) {
-      fetchReauthUser().then(resp => this.handleLoginUser(resp))
-    } else {
-      this.setState((prevState) => {
-        return {
-          ...prevState.auth,
-          authenticating: false
-        }
-      })
+      fetchReauthUser()
+      .then(resp =>  this.props.loadInitialUserState(resp.user.id))
     }
   }
+
+  handleLogout = () => {
+    this.setState({
+      auth: {
+        user: {}
+      }
+    })
+  }
+
 
   handleLoginUser = (user) => {
     const newAuth = {
         ...this.state.auth,
-        authenticating: false,
-        currentUser: user
+        user: user
     }
 
     this.setState({
       auth: newAuth
     })
+
+    localStorage.setItem('token', this.state.auth.user.jwt)
   }
 
 
   render() {
     const loggedIn = !!this.props.currentUser.id
-    console.log(this.props.currentUser)
+
     return (
       <div>
       <Navbar/>
         <Switch>
           <Route exact path="/homepage" render={(props) => <HomeContainer {...props}/>}/>
           <Route exact path="/sign-up" render={(props) => <SignUp {...props}/>}/>
-          <Route exact path="/login" render={(props) => <Login handleLoginUser={this.handleLoginUser} loggedIn={loggedIn} {...props}/>}/>
+          <Route exact path="/login" render={(props) => <Login handleLoginUser={this.handleLoginUser} {...props}/>}/>
           <Route exact path="/signedup" render={(props) => <SignUpJoin {...props}/>}/>
           <Route exact path="/create" render={(props) => <HouseCreateForm loggedIn={loggedIn} {...props}/>}/>
         </Switch>
@@ -67,4 +70,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(state => ({ currentUser: state.currentUser }))(App))
+export default withRouter(connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(App))

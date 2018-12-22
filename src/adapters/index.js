@@ -3,10 +3,13 @@ const baseUserUrl = "http://localhost:3001/users"
 const baseLoginUrl = "http://localhost:3001/login"
 const baseUrl = "http://localhost:3001/reauth"
 
-export const fetchLoginActor = (body) => {
+export const fetchLoginUser = (body) => {
   return fetch(baseLoginUrl, {
     method: "POST",
-    headers: headers(),
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+    },
     body: JSON.stringify(body)
   }).then(resp => resp.json())
 }
