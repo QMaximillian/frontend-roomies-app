@@ -66,4 +66,4 @@ class Login extends Component {
    }
  }
 
- export default connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(Login)
+ export default withRouter(connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(Login))

@@ -8,6 +8,8 @@ class HomeContainer extends Component {
    render() {
      return (
         <div className="home-container">
+          <div> Your Tasks </div>
+          <div> Split Tasks </div>
 
         </div>
      )

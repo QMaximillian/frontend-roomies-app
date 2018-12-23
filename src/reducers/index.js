@@ -1,4 +1,4 @@
-import { LOAD_INITIAL_USER_STATE } from '../actions/types'
+import { LOAD_INITIAL_USER_STATE, LOGOUT_USER_STATE } from '../actions/types'
 
 
 export const initialState = {
@@ -16,6 +16,14 @@ export const userReducer = (state = initialState, action) => {
     return {
       ...state,
       currentUser: action.payload.currentUser
+    }
+
+    case LOGOUT_USER_STATE:
+    return {
+      ...state,
+      currentUser: {
+        id: action.payload.currentUser.id
+      }
     }
 
     default:

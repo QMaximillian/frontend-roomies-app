@@ -42,7 +42,8 @@ export const fetchCreateHome = (e, body) => {
   return fetch(baseHomeUrl, {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
     },
     body: JSON.stringify(body)
   }).then(resp => resp.json())
@@ -52,7 +53,8 @@ export const fetchCreateUser = (body) => {
   return fetch(baseUserUrl, {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
     body: JSON.stringify(body)
   }).then(resp => resp.json())

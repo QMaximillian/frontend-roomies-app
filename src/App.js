@@ -9,8 +9,8 @@ import Login from './components/Login'
 import { withRouter } from "react-router";
 import SignUpJoin from './components/SignUpJoin'
 import HouseCreateForm from './components/HouseCreateForm'
-import { loadInitialUserState } from './actions/index.js'
-import { fetchReauthUser } from './adapters/index.js'
+import { loadInitialUserState, logoutUserState } from './actions/index.js'
+import { fetchReauthUser, fetchCreateUser } from './adapters/index.js'
 
 
 class App extends Component {
@@ -28,14 +28,6 @@ class App extends Component {
     }
   }
 
-  handleLogout = () => {
-    this.setState({
-      auth: {
-        user: {}
-      }
-    })
-  }
-
 
   handleLoginUser = (user) => {
     const newAuth = {
@@ -50,13 +42,19 @@ class App extends Component {
     localStorage.setItem('token', this.state.auth.user.jwt)
   }
 
+  handleLogout = () => {
+    localStorage.removeItem('token')
+    this.props.logoutUserState()
+  }
 
   render() {
     const loggedIn = !!this.props.currentUser.id
-
+    console.log(loggedIn)
     return (
       <div>
-      <Navbar/>
+      <Navbar
+        loggedIn={loggedIn}
+        handleLogout={this.handleLogout}/>
         <Switch>
           <Route exact path="/homepage" render={(props) => <HomeContainer {...props}/>}/>
           <Route exact path="/sign-up" render={(props) => <SignUp {...props}/>}/>
@@ -70,4 +68,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState })(App))
+export default withRouter(connect(state => ({ currentUser: state.currentUser }), { loadInitialUserState, logoutUserState })(App))

@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { withRouter } from "react-router";
-import { fetchCreateUser } from '../adapters/index.js'
 import { loadInitialUserState } from '../actions/index.js'
+import { fetchCreateUser } from '../adapters/index.js'
 
 class SignUp extends Component {
 
     state = {
       redirect: false,
       user: {
-        name: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         age: ''
@@ -36,14 +37,15 @@ class SignUp extends Component {
     })
     }
 
-    handleSignUp = (e) => {
+    handleSignUp = (e, body) => {
       e.preventDefault()
-      fetchCreateUser({user: this.state.user}).then(resp =>
-      this.props.loadInitialUserState(resp.id))
-      .then(this.setState({
-          redirect: true
-      })
-    )
+      fetchCreateUser(body)
+      .then(resp => {
+        console.log(resp)
+        localStorage.setItem('token', resp.user.jwt)
+      this.props.loadInitialUserState(resp.user.id)
+      this.setState({redirect: true})
+    })
     }
 
 
@@ -51,7 +53,6 @@ class SignUp extends Component {
 
 
      render() {
-       console.log(this.props)
        return (
           <form
             onChange={this.handleChange}>
@@ -66,7 +67,7 @@ class SignUp extends Component {
                 name='password'/>
             </div>
             <button
-              onClick={(e) => this.handleSignUp(e)}>Submit Me
+              onClick={(e) => this.handleSignUp(e, {user: this.state.user})}>Submit Me
             </button>
           </form>
        )
