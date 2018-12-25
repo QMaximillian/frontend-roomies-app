@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../App.css'
-import { fetchCreateHome } from '../adapters/index.js'
+import { createAndLoadHouse } from '../actions/index.js'
 import withAuth from '../hocs/withAuth'
 
 class HouseCreateForm extends Component {
@@ -12,13 +12,9 @@ class HouseCreateForm extends Component {
     home: {
       home_number: "",
       home_address: "",
-      city: "",
-      state: "",
+      city: "New York City",
+      state: "New York",
       zip_code: 0
-    },
-    roomate_emails: {
-      email1: "",
-      email2: ""
     }
     // TODO:
       // Structure home state with correct params for Rails API
@@ -36,9 +32,8 @@ class HouseCreateForm extends Component {
             [e.target.name]: e.target.value
           }
         }
-      }, () => console.log(this.state))
+      })
   }
-
 
   handleRoomateEmail = (e) => {
     this.setState({
@@ -46,18 +41,19 @@ class HouseCreateForm extends Component {
         ...this.state.roomate_emails,
         [e.target.name]: e.target.value
       }
-    }, () => console.log(this.state))
+    })
   }
 
-
-  alertPossibleRoomate = () => {
+  handleHouseCreate = (event, params) => {
+    event.preventDefault()
+    this.props.createAndLoadHouse(params)
+    this.props.handleCreated('add-roomates')
 
   }
 
    render() {
      const homeParams = {home: this.state.home}
-
-     console.log(this.props);
+     console.log(homeParams)
      return (
       <Fragment>
         <label
@@ -82,14 +78,23 @@ class HouseCreateForm extends Component {
 
             <div className="house-item 3">
               <label>City</label>
-              <input
-                name="city"/>
+              <select
+                name="city"
+                defaultValue={this.state.home.city}>
+              <option value="New York City">New York City</option>
+                </select>
             </div>
 
             <div className="house-item 5">
               <label>State</label>
-              <input
-                name="state"/>
+              <select
+                name="state">
+                <option
+                  name="state"
+                  defaultValue={this.state.home.state}>
+                New York
+                </option>
+                </select>
             </div>
 
             <div className="house-item">
@@ -97,50 +102,15 @@ class HouseCreateForm extends Component {
               <input
                 name="zip_code"/>
             </div>
+
             <button
               className="house-item house-submit"
-              onClick={(e) => fetchCreateHome(e, homeParams).then(console.log)}>Submit
+              onClick={(event) => this.handleHouseCreate(event, homeParams)}>Submit
             </button>
           </form>
-
-
-          <form
-            onChange={this.handleRoomateEmail}>
-            <div>
-              <label>Roomate E-Mail</label>
-              <input
-                name="email1"
-                className="house-item .house-item1"/>
-            </div>
-            <button
-              onClick={() => this.alertPossibleRoomate()}></button>
-
-            {/*}<div>
-              <label>Roomate E-Mail</label>
-              <input
-                name="email2"
-                className="house-item"/>
-            </div>
-
-            <div>
-              <label>Roomate E-Mail</label>
-              <input
-                name="roomate3email"
-                className=" house-item"/>
-            </div>*/}
-          </form>
-
-
-
-
-
-
-
-
-
       </Fragment>
      )
    }
  }
 
- export default withAuth(withRouter(connect()(HouseCreateForm)))
+ export default connect(null, { createAndLoadHouse })(HouseCreateForm)

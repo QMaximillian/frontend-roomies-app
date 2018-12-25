@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import '../App.css'
-// import withAuth from '../hocs/withAuth'
+import withAuth from '../hocs/withAuth'
 import { withRouter } from "react-router";
 
 class HomeContainer extends Component {
@@ -16,4 +16,4 @@ class HomeContainer extends Component {
    }
  }
 
-export default withRouter(connect()(HomeContainer))
+export default withRouter(withAuth(connect()(HomeContainer)))

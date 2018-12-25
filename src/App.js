@@ -3,12 +3,14 @@ import './App.css';
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router'
 import HomeContainer from './containers/HomeContainer'
+import LandingContainer from './containers/LandingContainer'
+import UserSettingsContainer from './containers/UserSettingsContainer'
 import Navbar from './components/Navbar'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import { withRouter } from "react-router";
 import SignUpJoin from './components/SignUpJoin'
-import HouseCreateForm from './components/HouseCreateForm'
+import HouseCreateContainer from './containers/HouseCreateContainer'
 import { loadInitialUserState, logoutUserState } from './actions/index.js'
 import { fetchReauthUser, fetchCreateUser } from './adapters/index.js'
 
@@ -45,6 +47,7 @@ class App extends Component {
   handleLogout = () => {
     localStorage.removeItem('token')
     this.props.logoutUserState()
+    return this.props.history.push('/landing')
   }
 
   render() {
@@ -56,11 +59,13 @@ class App extends Component {
         loggedIn={loggedIn}
         handleLogout={this.handleLogout}/>
         <Switch>
-          <Route exact path="/homepage" render={(props) => <HomeContainer {...props}/>}/>
+          <Route exact path="/landing" render={(props) => <LandingContainer {...props}/>}/>
           <Route exact path="/sign-up" render={(props) => <SignUp {...props}/>}/>
           <Route exact path="/login" render={(props) => <Login handleLoginUser={this.handleLoginUser} {...props}/>}/>
           <Route exact path="/signedup" render={(props) => <SignUpJoin {...props}/>}/>
-          <Route exact path="/create" render={(props) => <HouseCreateForm loggedIn={loggedIn} {...props}/>}/>
+          <Route exact path="/create" render={(props) => <HouseCreateContainer loggedIn={loggedIn} {...props}/>}/>
+          <Route exact path="/home" render={(props) => <HomeContainer loggedIn={loggedIn} {...props}/>}/>
+          <Route exact path="/user-settings" render={(props) => <UserSettingsContainer loggedIn={loggedIn} {...props}/>}/>
         </Switch>
       </div>
 

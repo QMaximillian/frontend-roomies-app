@@ -9,7 +9,7 @@ const withAuth = (WrappedComponent) => {
       } else if (localStorage.getItem('token')) {
         return <div> Loading </div>
       } else {
-      return <Redirect to='/homepage' />
+      return <Redirect to='/landing' />
     }
   }
 }

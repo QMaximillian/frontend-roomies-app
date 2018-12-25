@@ -1,4 +1,4 @@
-import { LOAD_INITIAL_USER_STATE, LOGOUT_USER_STATE } from '../actions/types'
+import { LOAD_INITIAL_USER_STATE, LOGOUT_USER_STATE, SET_HOME } from '../actions/types'
 
 
 export const initialState = {
@@ -24,6 +24,12 @@ export const userReducer = (state = initialState, action) => {
       currentUser: {
         id: action.payload.currentUser.id
       }
+    }
+
+    case SET_HOME:
+    return {
+        ...state,
+        currentHome: action.payload.currentHome
     }
 
     default:

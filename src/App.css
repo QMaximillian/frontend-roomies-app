@@ -38,6 +38,10 @@
   grid-column-start: 7;
 }
 
+.nav-button-logout {
+  grid-column-start: 7;
+}
+
 .nav-button-login {
   grid-column-start: 6;
 }

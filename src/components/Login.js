@@ -16,7 +16,7 @@ class Login extends Component {
 
   componentDidUpdate(){
     if (this.state.redirect) {
-     return this.props.history.push('/roomie-home')
+     return this.props.history.push('/home')
    }
   }
 
