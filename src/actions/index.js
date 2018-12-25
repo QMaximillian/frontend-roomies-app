@@ -1,5 +1,5 @@
 import { LOAD_INITIAL_USER_STATE, LOGOUT_USER_STATE, SET_HOME } from './types.js'
-import { fetchCurrentUser, fetchCreateHome } from '../adapters/index.js'
+import { fetchCurrentUser, fetchCreateHome, fetchCreateUserHome } from '../adapters/index.js'
 
 export const loadInitialUserState = (id) => {
   return (dispatch) => {
@@ -10,11 +10,12 @@ export const loadInitialUserState = (id) => {
   }
 }
 
-export const createAndLoadHouse = (params) => {
+export const createAndLoadHouse = (params, id) => {
   return (dispatch) => {
-    fetchCreateHome(params).then(resp => {
-      dispatch(setHouse(resp))
-    })
+    fetchCreateHome(params)
+    .then(resp => dispatch(setHouse(resp)))
+    .then(resp => fetchCreateUserHome(id, resp.payload.currentHome.id))
+
   }
 }
 

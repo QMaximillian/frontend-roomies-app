@@ -16,6 +16,7 @@ class RoomateInvite extends Component {
     }
 
     sendEmail = () => {
+      
       this.props.handleCreated('rules')
     }
 

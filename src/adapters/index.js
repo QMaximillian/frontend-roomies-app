@@ -2,6 +2,7 @@ const baseHomeUrl = "http://localhost:3001/homes"
 const baseUserUrl = "http://localhost:3001/users"
 const baseLoginUrl = "http://localhost:3001/login"
 const baseUrl = "http://localhost:3001/reauth"
+const baseUserHomeUrl = "http://localhost:3001/user_homes"
 
 // export const fetchAddRoomate = () => {
 //   return fetch(ba, {})
@@ -36,6 +37,14 @@ export const fetchReauthUser = () => {
 
 export const fetchUser = () =>  {
   return fetch(baseUserUrl).then(resp => resp.json())
+}
+
+export const fetchCreateUserHome = (userId, homeId) => {
+  return fetch(baseUserHomeUrl, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ user_homes: { user_id: userId, home_id: homeId }})
+  })
 }
 
 export const fetchCurrentUser = (id) => {

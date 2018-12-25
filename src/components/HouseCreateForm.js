@@ -5,6 +5,7 @@ import '../App.css'
 import { createAndLoadHouse } from '../actions/index.js'
 import withAuth from '../hocs/withAuth'
 
+
 class HouseCreateForm extends Component {
 
   state = {
@@ -44,16 +45,17 @@ class HouseCreateForm extends Component {
     })
   }
 
-  handleHouseCreate = (event, params) => {
+  handleHouseCreate = (event, params, id) => {
     event.preventDefault()
-    this.props.createAndLoadHouse(params)
+    this.props.createAndLoadHouse(params, id)
+
     this.props.handleCreated('add-roomates')
 
   }
 
    render() {
      const homeParams = {home: this.state.home}
-     console.log(homeParams)
+
      return (
       <Fragment>
         <label
@@ -105,7 +107,7 @@ class HouseCreateForm extends Component {
 
             <button
               className="house-item house-submit"
-              onClick={(event) => this.handleHouseCreate(event, homeParams)}>Submit
+              onClick={(event) => this.handleHouseCreate(event, homeParams, this.props.currentUser.id)}>Submit
             </button>
           </form>
       </Fragment>
@@ -113,4 +115,4 @@ class HouseCreateForm extends Component {
    }
  }
 
- export default connect(null, { createAndLoadHouse })(HouseCreateForm)
+ export default connect(state => ({ currentUser: state.currentUser }), { createAndLoadHouse })(HouseCreateForm)
