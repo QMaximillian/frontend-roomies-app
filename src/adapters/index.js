@@ -14,7 +14,7 @@ export const fetchSendInviteEmail = (params) => {
     method: 'POST',
     headers: headers(),
     body: JSON.stringify(params)
-  }).then(resp => resp.json()).then(console.log)
+  }).then(resp => resp.json())
 }
 
 export const fetchLoginUser = (body) => {
