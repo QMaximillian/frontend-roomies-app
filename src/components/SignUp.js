@@ -57,6 +57,16 @@ class SignUp extends Component {
           <form
             onChange={this.handleChange}>
             <div>
+              <label>First Name</label>
+              <input
+                name='first_name'/>
+            </div>
+            <div>
+              <label>Last Name</label>
+              <input
+                name='last_name'/>
+            </div>
+            <div>
               <label>Email</label>
               <input
                 name='email'/>

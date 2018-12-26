@@ -1,26 +1,34 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { fetchSendEmail } from '../adapters/index'
-
+import { connect } from 'react-redux'
 
 class RoomateInvite extends Component {
 
     state = {
-      email: ''
+        email: ''
     }
 
     handleEmail = (e) => {
       this.setState({
-        email: e.target.value
+          email: e.target.value,
       }, () => console.log(this.state))
     }
 
     sendEmail = () => {
-      
+
       this.props.handleCreated('rules')
     }
 
    render() {
+
+     const inviteEmailParams = {invite_email: { home_code: this.props.currentHome.home_code,
+     first_name: this.props.currentUser.first_name,
+     last_name: this.props.currentUser.last_name,
+      sender_id: this.props.currentUser.id,
+    email: this.state.email}}
+
+     console.log(inviteEmailParams)
      return (
         <div>
           <input onChange={this.handleEmail}>
@@ -31,4 +39,4 @@ class RoomateInvite extends Component {
    }
  }
 
- export default withRouter(RoomateInvite)
+ export default withRouter(connect(state => ({currentUser: state.currentUser, currentHome: state.currentHome }))(RoomateInvite))
