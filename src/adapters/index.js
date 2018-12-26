@@ -3,14 +3,19 @@ const baseUserUrl = "http://localhost:3001/users"
 const baseLoginUrl = "http://localhost:3001/login"
 const baseUrl = "http://localhost:3001/reauth"
 const baseUserHomeUrl = "http://localhost:3001/user_homes"
+const baseInviteEmailUrl = "http://localhost:3001/invite_emails"
 
 // export const fetchAddRoomate = () => {
 //   return fetch(ba, {})
 // }
 
-// export const fetchSendEmail = (email) => {
-//   return fetch()
-// }
+export const fetchSendInviteEmail = (params) => {
+  return fetch(baseInviteEmailUrl, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify(params)
+  }).then(resp => resp.json()).then(console.log)
+}
 
 export const fetchLoginUser = (body) => {
   return fetch(baseLoginUrl, {

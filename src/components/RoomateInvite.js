@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { fetchSendEmail } from '../adapters/index'
 import { connect } from 'react-redux'
+import { fetchSendInviteEmail } from '../adapters/index.js'
 
 class RoomateInvite extends Component {
 
@@ -15,8 +16,9 @@ class RoomateInvite extends Component {
       }, () => console.log(this.state))
     }
 
-    sendEmail = () => {
-
+    sendEmail = (e, params) => {
+      e.preventDefault()
+      fetchSendInviteEmail(params)
       this.props.handleCreated('rules')
     }
 
@@ -33,7 +35,7 @@ class RoomateInvite extends Component {
         <div>
           <input onChange={this.handleEmail}>
           </input>
-          <button onClick={this.sendEmail}>Submit</button>
+          <button onClick={(e) => this.sendEmail(e, inviteEmailParams)}>Submit</button>
         </div>
      )
    }
