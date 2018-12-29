@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import { loadHouse } from '../actions/index.js'
+import { Redirect } from 'react-router-dom'
 
 class SignUpJoin extends Component {
 
   state = {
     create: false,
     join: false,
-    house_code: ''
+    home_uuid: ''
   }
 
   componentDidUpdate() {
@@ -22,11 +24,25 @@ class SignUpJoin extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+          [e.target.name]: e.target.value
     }, () => console.log(this.state))
   }
 
+  handleHouseJoin = () => {
+
+    this.props.loadHouse(this.state.home_uuid, this.props.currentUser.id)
+
+    this.props.history.push('/home')
+
+   //  fetchGetHome(this.state.home_uuid).then(resp => {
+   //     fetchCreateUserHome(this.props.currentUser.id, resp.id)
+   //     return <Redirect to="homepage"/>
+   // })
+  }
+
  render() {
+
+
      return (
         <div>
       <button
@@ -36,19 +52,18 @@ class SignUpJoin extends Component {
         <br />
         <label>Join a House</label>
         <input
-          name='house_code'
+          name='home_uuid'
           onChange={this.handleChange}
-          value={this.state.house_code}
+          value={this.state.home_uuid}
           />
         <button
-          onClick={() => this.setState({join: true})}
+          onClick={() => this.handleHouseJoin()}
         >Join a House
         </button>
         </div>
      )
    }
-
 }
 
 
-export default withRouter(connect()(SignUpJoin))
+export default withRouter(connect(state => ({currentUser: state.currentUser }), { loadHouse })(SignUpJoin))

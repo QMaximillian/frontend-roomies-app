@@ -24,7 +24,7 @@ class RoomateInvite extends Component {
 
    render() {
 
-     const inviteEmailParams = {invite_email: { home_code: this.props.currentHome.home_code,
+     const inviteEmailParams = {invite_email: { home_code: this.props.currentHome.id,
      first_name: this.props.currentUser.first_name,
      last_name: this.props.currentUser.last_name,
       sender_id: this.props.currentUser.id,

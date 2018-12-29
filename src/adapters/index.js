@@ -9,6 +9,12 @@ const baseInviteEmailUrl = "http://localhost:3001/invite_emails"
 //   return fetch(ba, {})
 // }
 
+export const fetchGetHome = (uuid) => {
+  return fetch(baseHomeUrl + `/${uuid}`, {
+    headers: headers()
+  }).then(resp => resp.json())
+}
+
 export const fetchSendInviteEmail = (params) => {
   return fetch(baseInviteEmailUrl, {
     method: 'POST',
@@ -48,7 +54,7 @@ export const fetchCreateUserHome = (userId, homeId) => {
   return fetch(baseUserHomeUrl, {
     method: 'POST',
     headers: headers(),
-    body: JSON.stringify({ user_homes: { user_id: userId, home_id: homeId }})
+    body: JSON.stringify({ user_home: { user_id: userId, home_id: homeId }})
   })
 }
 
