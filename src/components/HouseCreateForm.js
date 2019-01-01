@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { withRouter } from 'react-router'
+// import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import '../App.css'
 import { createAndLoadHouse } from '../actions/index.js'
-import withAuth from '../hocs/withAuth'
+// import withAuth from '../hocs/withAuth'
 
 
 class HouseCreateForm extends Component {

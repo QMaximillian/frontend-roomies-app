@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { fetchSendEmail } from '../adapters/index'
 import { connect } from 'react-redux'
 import { fetchSendInviteEmail } from '../adapters/index.js'
 

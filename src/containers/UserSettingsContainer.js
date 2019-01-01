@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { fetchAddRoomate } from '../adapters/index'
 
 export default class UserSettingsContainer extends Component {
 

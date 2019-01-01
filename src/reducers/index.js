@@ -6,6 +6,8 @@ export const initialState = {
   currentDuty: {},
   currentHome: {},
   userDuties: [],
+  userHomes: [],
+  currentUserHome: {},
   auth: {}
 }
 
@@ -29,7 +31,8 @@ export const userReducer = (state = initialState, action) => {
     case SET_HOME:
     return {
         ...state,
-        currentHome: action.payload.currentHome
+        currentHome: action.payload.currentHome,
+        tasks: action.payload.tasks
     }
 
     default:

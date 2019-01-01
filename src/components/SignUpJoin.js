@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { loadHouse } from '../actions/index.js'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
+import { fetchCreateUserHome } from '../adapters/index.js'
 
 class SignUpJoin extends Component {
 
@@ -29,20 +30,18 @@ class SignUpJoin extends Component {
   }
 
   handleHouseJoin = () => {
+    this.props.loadHouse(this.props.currentUser.id, this.state.home_uuid)
 
-    this.props.loadHouse(this.state.home_uuid, this.props.currentUser.id)
+
+
 
     this.props.history.push('/home')
-
-   //  fetchGetHome(this.state.home_uuid).then(resp => {
-   //     fetchCreateUserHome(this.props.currentUser.id, resp.id)
-   //     return <Redirect to="homepage"/>
-   // })
   }
 
+
+
  render() {
-
-
+   console.log(this.props.currentUser.id)
      return (
         <div>
       <button
@@ -66,4 +65,4 @@ class SignUpJoin extends Component {
 }
 
 
-export default withRouter(connect(state => ({currentUser: state.currentUser }), { loadHouse })(SignUpJoin))
+export default withRouter(connect(state => ({currentUser: state.currentUser, currentHome: state.currentHome }), { loadHouse })(SignUpJoin))

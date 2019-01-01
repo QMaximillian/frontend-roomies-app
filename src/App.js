@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router'
 import HomeContainer from './containers/HomeContainer'
 import LandingContainer from './containers/LandingContainer'
+import TaskVoteContainer from './containers/TaskVoteContainer'
 import UserSettingsContainer from './containers/UserSettingsContainer'
 import Navbar from './components/Navbar'
 import SignUp from './components/SignUp'
@@ -12,7 +13,7 @@ import { withRouter } from "react-router";
 import SignUpJoin from './components/SignUpJoin'
 import HouseCreateContainer from './containers/HouseCreateContainer'
 import { loadInitialUserState, logoutUserState } from './actions/index.js'
-import { fetchReauthUser, fetchCreateUser } from './adapters/index.js'
+import { fetchReauthUser } from './adapters/index.js'
 
 
 class App extends Component {
@@ -51,6 +52,7 @@ class App extends Component {
   }
 
   render() {
+
     const loggedIn = !!this.props.currentUser.id
     console.log(loggedIn)
     return (
@@ -66,6 +68,7 @@ class App extends Component {
           <Route exact path="/create" render={(props) => <HouseCreateContainer loggedIn={loggedIn} {...props}/>}/>
           <Route exact path="/home" render={(props) => <HomeContainer loggedIn={loggedIn} {...props}/>}/>
           <Route exact path="/user-settings" render={(props) => <UserSettingsContainer loggedIn={loggedIn} {...props}/>}/>
+          <Route exact path="/task-vote" render={(props) => <TaskVoteContainer loggedIn={loggedIn} {...props}/>}/>
         </Switch>
       </div>
 

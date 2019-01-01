@@ -1,22 +1,45 @@
-import { LOAD_INITIAL_USER_STATE, LOGOUT_USER_STATE, SET_HOME } from './types.js'
-import { fetchCurrentUser, fetchGetHome, fetchCreateHome, fetchCreateUserHome } from '../adapters/index.js'
+import { LOAD_INITIAL_USER_STATE, LOGOUT_USER_STATE, SET_HOME_TASKS, SET_HOME } from './types.js'
+import { fetchCurrentUser, fetchGetHome, fetchCreateHome, fetchCreateUserHome, fetchGetHouseTasks } from '../adapters/index.js'
+
+
+export const loadHouseTasks = (home_id) => {
+  return (dispatch) => {
+    fetchGetHouseTasks(home_id).then(resp => {
+      dispatch(setHomeTasks(resp))
+    })
+  }
+}
+
+export const createAndLoadUserHome = ( user_id, home_id) => {
+  return (dispatch) => {
+    fetchCreateUserHome(user_id, home_id)
+    .then(resp => console.log(resp))
+  }
+
+}
+
+
 
 export const loadInitialUserState = (id) => {
   return (dispatch) => {
     fetchCurrentUser(id).then(resp =>
     {
-      dispatch(setUser(resp.user))
+      dispatch(setUser(resp))
     })
   }
 }
 
-export const loadHouse = (uuid, id) => {
+export const loadHouse = (id, uuid) => {
   return (dispatch) => {
   fetchGetHome(uuid)
   .then(resp => dispatch(setHouse(resp)))
   .then(resp => fetchCreateUserHome(id, resp.payload.currentHome.id))
 }
 }
+
+
+
+
 
 export const createAndLoadHouse = (params, id) => {
   return (dispatch) => {
@@ -27,11 +50,13 @@ export const createAndLoadHouse = (params, id) => {
   }
 }
 
-export const setUser = (user) => {
+export const setUser = (resp) => {
   return {
+
     type: LOAD_INITIAL_USER_STATE,
     payload: {
-      currentUser: user
+      currentUser: resp.user,
+      currentUserHome: resp.user_homes
     }
   }
 }
@@ -53,13 +78,25 @@ export const logoutUser = () => {
   }
 }
 
+export const setHomeTasks = (homeTasks) => {
+  return {
+    type: SET_HOME_TASKS,
+    payload: {
+      homeTasks: homeTasks
+    }
+  }
+}
 
 
-export const setHouse = (home) => {
+
+export const setHouse = (resp) => {
+  console.log(resp)
   return {
     type: SET_HOME,
     payload: {
-      currentHome: home
+      currentHome: resp.home,
+      tasks: resp.tasks
+
     }
   }
 }

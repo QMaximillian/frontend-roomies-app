@@ -17,8 +17,8 @@ const Navbar = (props) => {
 
         <div
         className="nav-button nav-button-settings">
-        <Link to="/user-settings">
-          User Settings
+        <Link to="/task-vote">
+          Vote On Tasks
         </Link>
         </div>
 

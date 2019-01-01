@@ -4,10 +4,11 @@ const baseLoginUrl = "http://localhost:3001/login"
 const baseUrl = "http://localhost:3001/reauth"
 const baseUserHomeUrl = "http://localhost:3001/user_homes"
 const baseInviteEmailUrl = "http://localhost:3001/invite_emails"
+const baseHomeTasks = "http://localhost:3001/tasks"
 
-// export const fetchAddRoomate = () => {
-//   return fetch(ba, {})
-// }
+export const fetchGetHouseTasks = (home_id) => {
+  return fetch(baseHomeTasks)
+}
 
 export const fetchGetHome = (uuid) => {
   return fetch(baseHomeUrl + `/${uuid}`, {

@@ -2,7 +2,7 @@ import HouseCreateForm from '../components/HouseCreateForm'
 import RoomateInvite from '../components/RoomateInvite'
 import withAuth from '../hocs/withAuth'
 import { withRouter } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 import Rules from '../components/Rules'
 
 import React, { Component } from 'react'
